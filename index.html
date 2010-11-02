@@ -159,6 +159,8 @@ $(function(){
             text = text.replace( url_regex , '' );
             var user_regex = /@\w+/gim;
             text = text.replace( user_regex , '' );
+            var unicode_regex = /[\u0100-\uFFFF]+/g;
+            text = text.replace( unicode_regex , '' );
             var other_symbols = new RegExp("[!@#$%^&\(\)-={}<>?~]", "gim");
             text = text.replace( other_symbols , ' ' )
             get_videos( text );
@@ -170,9 +172,6 @@ $(function(){
         var id = $(this).data('id');
         $("#tubelist li").removeClass('selected');
         $(this).addClass('selected');
-/*        $("#param").attr('value', 'http://www.youtube.com/v/'+id+'?version=3');
-        $("#embed").attr('src', 'http://www.youtube.com/v/'+id+'?version=3');
-*/
         var params = { allowScriptAccess: "always" };
         var atts = { id: "ytplayer" };
         swfobject.embedSWF("http://www.youtube.com/v/"+id+"?enablejsapi=1&playerapiid=ytplayer", 
