@@ -1,0 +1,21 @@
+==tweettube==
+Simple mashup to discover music in tweets.
+
+Searches on youtube for 'music' videos with terms extracted from Yahoo! term extractor.
+
+====youtube search====
+USE "http://github.com/vsr/tweettube/raw/master/youtube.search.xml" as tweettube; select * from tweettube where query='i love my india' and category = '{http://gdata.youtube.com/schemas/2007/categories.cat}Music'
+
+====term extractor====
+select * from search.termextract where context="Yahoo pipes compiled to python now run on Google App Engine"
+
+====tweets====
+http://pipes.yahoo.com/pipes/pipe.run?_id=44ea0b5cdcb3076e7ce97e65ba6690d2&_render=json&q=#query#
+
+_____________________________________________
+USE "http://github.com/vsr/tweettube/raw/master/youtube.search.xml" as tweettube; select * from tweettube where category = '{http://gdata.youtube.com/schemas/2007/categories.cat}Music' and  query in(select value.items.content from json where url="http://pipes.yahoo.com/pipes/pipe.run?_id=44ea0b5cdcb3076e7ce97e65ba6690d2&_render=json&q=india%20twitter%20what%20business")
+_______________________________________________
+====queries====
+
+http://query.yahooapis.com/v1/public/yql?q=USE%20%22http%3A%2F%2Fgithub.com%2Fvsr%2Ftweettube%2Fraw%2Fmaster%2Fyoutube.search.xml%22%20as%20tweettube%3B%20select%20*%20from%20tweettube%20where%20category%20%3D%20'%7Bhttp%3A%2F%2Fgdata.youtube.com%2Fschemas%2F2007%2Fcategories.cat%7DMusic'%20and%20%20query%20in(select%20value.items.content%20from%20json%20where%20url%3D%22http%3A%2F%2Fpipes.yahoo.com%2Fpipes%2Fpipe.run%3F_id%3D44ea0b5cdcb3076e7ce97e65ba6690d2%26_render%3Djson%26q%3Dindia%2520twitter%2520what%2520business%22)
+http://query.yahooapis.com/v1/public/yql?q=USE%20%22http%3A%2F%2Fgithub.com%2Fvsr%2Ftweettube%2Fraw%2Fmaster%2Fyoutube.search.xml%22%20as%20tweettube%3B%20select%20*%20from%20tweettube%20where%20category%20%3D%20'%7Bhttp%3A%2F%2Fgdata.youtube.com%2Fschemas%2F2007%2Fcategories.cat%7DMusic'%20and%20%20query%20in(select%20value.items.content%20from%20json%20where%20url%3D%22http%3A%2F%2Fpipes.yahoo.com%2Fpipes%2Fpipe.run%3F_id%3D44ea0b5cdcb3076e7ce97e65ba6690d2%26_render%3Djson%26q%3D$query$%22)
